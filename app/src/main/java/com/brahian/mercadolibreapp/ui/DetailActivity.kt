@@ -7,9 +7,14 @@ import android.util.Log
 import android.view.View.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.brahian.mercadolibreapp.R
+import com.brahian.mercadolibreapp.model.Attribute
 import com.brahian.mercadolibreapp.model.Product
 import com.brahian.mercadolibreapp.model.Seller
+import com.brahian.mercadolibreapp.ui.view.AttributeAdapter
 import com.brahian.mercadolibreapp.util.DataState.*
 import com.brahian.mercadolibreapp.util.formatToCurrency
 import com.brahian.mercadolibreapp.viewmodel.DetailStateEvent
@@ -59,22 +64,22 @@ class DetailActivity : AppCompatActivity() {
       }
     )
     viewModel.sellerDataState.observe(
-            this,
-            {
-              when (it) {
-                is Success -> {
-                  setSellerLoading(false)
-                  setSeller(it.data)
-                }
-                is Error -> {
-                  setSellerLoading(false)
-                  setSellerError(it.exception.message)
-                }
-                is Loading -> {
-                  setSellerLoading(true)
-                }
-              }
-            }
+      this,
+      {
+        when (it) {
+          is Success -> {
+            setSellerLoading(false)
+            setSeller(it.data)
+          }
+          is Error -> {
+            setSellerLoading(false)
+            setSellerError(it.exception.message)
+          }
+          is Loading -> {
+            setSellerLoading(true)
+          }
+        }
+      }
     )
   }
 
@@ -85,6 +90,19 @@ class DetailActivity : AppCompatActivity() {
     formatShippingAndMercadoPagoInfo(product)
     textview_stock.text = "Stock: ${product.available_quantity}"
     glide.load(product.thumbnail).placeholder(R.drawable.ic_launcher_background).into(imageview_product)
+    setProductAttributes(product.attributes)
+  }
+
+  private fun setProductAttributes(attributes : List<Attribute>?) {
+    recyclerview_attributes.apply {
+      layoutManager = LinearLayoutManager(this@DetailActivity)
+      adapter = AttributeAdapter(attributes ?: listOf())
+      addItemDecoration(
+        DividerItemDecoration(this@DetailActivity, DividerItemDecoration.VERTICAL).apply {
+          AppCompatResources.getDrawable(this@DetailActivity, R.drawable.divider_layout)?.let { setDrawable(it) }
+        }
+      )
+    }
   }
 
   private fun formatShippingAndMercadoPagoInfo(product : Product) {
