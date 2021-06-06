@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.brahian.mercadolibreapp.model.Currency
 import com.brahian.mercadolibreapp.model.Product
 import com.brahian.mercadolibreapp.model.Seller
 import com.brahian.mercadolibreapp.repository.MercadoLibreRepository
@@ -26,10 +25,6 @@ class DetailViewModel @Inject constructor(
   val productDataState: LiveData<DataState<Product>>
     get() = _productDataState
 
-  private val _currencyDataState: MutableLiveData<DataState<Currency>> = MutableLiveData()
-  val currencyDataState: LiveData<DataState<Currency>>
-    get() = _currencyDataState
-
   private val _sellerDataState: MutableLiveData<DataState<Seller>> = MutableLiveData()
   val sellerDataState: LiveData<DataState<Seller>>
     get() = _sellerDataState
@@ -39,13 +34,6 @@ class DetailViewModel @Inject constructor(
       when (event) {
         is DetailStateEvent.GetProductDetail -> {
           if (_productDataState.value == null) _productDataState.postValue(DataState.Success(event.product))
-        }
-        is DetailStateEvent.GetCurrency -> {
-          if (_currencyDataState.value == null) {
-            mercadoLibreRepository.getCurrency(event.currencyId).onEach {
-              _currencyDataState.value = it
-            }.launchIn(viewModelScope)
-          }
         }
         is DetailStateEvent.GetSeller -> {
           if (_sellerDataState.value == null) {
@@ -61,6 +49,5 @@ class DetailViewModel @Inject constructor(
 
 sealed class DetailStateEvent {
   data class GetProductDetail(val product : Product) : DetailStateEvent()
-  data class GetCurrency(val currencyId : String) : DetailStateEvent()
   data class GetSeller(val sellerId : String) : DetailStateEvent()
 }

@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.brahian.mercadolibreapp.R
 import com.brahian.mercadolibreapp.model.Product
+import com.brahian.mercadolibreapp.util.formatToCurrency
 import com.bumptech.glide.RequestManager
 
 class ProductAdapter(private val dataSet: List<Product>, private val glide : RequestManager, private val onTap : (Product)-> Unit) :
@@ -34,7 +35,7 @@ class ProductAdapter(private val dataSet: List<Product>, private val glide : Req
       dataSet[position].let {
         glide.load(it.thumbnail).placeholder(R.drawable.ic_launcher_background).into(image)
         title.text = it.title
-        price.text = it.price.toString()
+        price.formatToCurrency(it.price)
         shipping.text =
           if (it.shipping?.free_shipping == true) "Free shipping!" else "No free shipping"
         location.text =

@@ -1,11 +1,9 @@
 package com.brahian.mercadolibreapp.repository
 
-import com.brahian.mercadolibreapp.model.Currency
 import com.brahian.mercadolibreapp.model.ProductSearchResponse
 import com.brahian.mercadolibreapp.model.Seller
 import com.brahian.mercadolibreapp.service.MercadoLibreAPIService
 import com.brahian.mercadolibreapp.util.DataState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
@@ -21,15 +19,6 @@ class MercadoLibreRepository @Inject constructor(
     emit(DataState.Loading)
     try {
       emit(DataState.Success(mercadoLibreAPIService.getProducts(COUNTRY_ID, query)))
-    } catch (e: Exception) {
-      emit(DataState.Error(e))
-    }
-  }
-
-  suspend fun getCurrency(id : String) : Flow<DataState<Currency>> = flow {
-    emit(DataState.Loading)
-    try {
-      emit(DataState.Success(mercadoLibreAPIService.getCurrency(id)))
     } catch (e: Exception) {
       emit(DataState.Error(e))
     }

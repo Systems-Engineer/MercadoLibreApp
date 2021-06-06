@@ -13,7 +13,6 @@ data class Product (
   val id : String?,
   val title : String?,
   val price : Double?,
-  val currency_id : String?,
   val available_quantity: Int?,
   val sold_quantity : Int?,
   val condition : String?,

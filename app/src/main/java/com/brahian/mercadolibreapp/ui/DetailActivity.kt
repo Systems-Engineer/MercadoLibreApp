@@ -8,17 +8,17 @@ import android.view.View.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.model.Currency
 import com.brahian.mercadolibreapp.model.Product
 import com.brahian.mercadolibreapp.model.Seller
 import com.brahian.mercadolibreapp.util.DataState.*
+import com.brahian.mercadolibreapp.util.formatToCurrency
 import com.brahian.mercadolibreapp.viewmodel.DetailStateEvent
 import com.brahian.mercadolibreapp.viewmodel.DetailViewModel
 import com.bumptech.glide.RequestManager
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_detail.*
-import java.lang.StringBuilder
+import kotlinx.android.synthetic.main.layout_seller_info.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
@@ -37,7 +37,6 @@ class DetailActivity : AppCompatActivity() {
     setObservers()
     intent.getParcelableExtra<Product>(PRODUCT)?.let {
       viewModel.setStateEvent(DetailStateEvent.GetProductDetail(it))
-      viewModel.setStateEvent(DetailStateEvent.GetCurrency(it.currency_id ?: ""))
       viewModel.setStateEvent(DetailStateEvent.GetSeller(it.seller?.id ?: ""))
     } ?: run {
       // TODO show snackbar error
@@ -58,24 +57,6 @@ class DetailActivity : AppCompatActivity() {
           }
         }
       }
-    )
-    viewModel.currencyDataState.observe(
-            this,
-            {
-              when (it) {
-                is Success -> {
-                  setCurrencyLoading(false)
-                  setCurrency(it.data)
-                }
-                is Error -> {
-                  setCurrencyLoading(false)
-                  setCurrencyError(it.exception.message)
-                }
-                is Loading -> {
-                  setCurrencyLoading(true)
-                }
-              }
-            }
     )
     viewModel.sellerDataState.observe(
             this,
@@ -100,39 +81,36 @@ class DetailActivity : AppCompatActivity() {
   private fun setDetail(product: Product) {
     textview_condition_sold.text = "${product.condition} | ${product.sold_quantity} sold"
     textview_title.text = product.title
-    textview_price.text = "${product.currency_id}${product.price}"
+    textview_price.formatToCurrency(product.price)
+    formatShippingAndMercadoPagoInfo(product)
+    textview_stock.text = "Stock: ${product.available_quantity}"
+    glide.load(product.thumbnail).placeholder(R.drawable.ic_launcher_background).into(imageview_product)
+  }
+
+  private fun formatShippingAndMercadoPagoInfo(product : Product) {
     val shippingAndPago = StringBuilder()
     if (product.shipping?.free_shipping == true) {
-      shippingAndPago.append("Free shipping")
-      if (product.accepts_mercadopago == true) shippingAndPago.append(" | Accepts mercadopago")
+      shippingAndPago.append("Free Shipping")
+      if (product.accepts_mercadopago == true) shippingAndPago.append(" | Accepts MercadoPago")
     } else if (product.accepts_mercadopago == true) {
-      shippingAndPago.append("Accepts mercadopago")
+      shippingAndPago.append("Accepts MercadoPago")
     }
     if (shippingAndPago.toString().isEmpty() || shippingAndPago.toString().isBlank()) textview_shipping_pago.visibility = GONE
     else textview_shipping_pago.text = shippingAndPago.toString()
-    textview_stock.text = "Stock: ${product.available_quantity}"
-    glide.load(product.thumbnail).placeholder(R.drawable.ic_launcher_background).into(imageview_product)
-
-    // Seller info
-    glide.load(R.drawable.ic_launcher_background).placeholder(R.drawable.ic_launcher_background).into(imageview_eshop)
-    textview_seller_name.text = product.seller?.id
-    textview_seller_address.text = "${product.seller_address?.city?.name} - ${product.seller_address?.state?.name}"
-  }
-
-  private fun setCurrency(currency : Currency) {
-
-  }
-
-  private fun setCurrencyError(message: String?) {
-    // no-op
-  }
-
-  private fun setCurrencyLoading(loading: Boolean) {
-    // no-op
   }
 
   private fun setSeller(seller : Seller) {
-
+    progressbar_seller.visibility = GONE
+    imageview_eshop.visibility = VISIBLE
+    glide.load(seller.logo).placeholder(R.drawable.ic_launcher_background).into(imageview_eshop)
+    textview_seller_name.apply {
+      text = seller.nickname
+      visibility = VISIBLE
+    }
+    textview_seller_reputation.apply{
+      text = seller.seller_reputation?.power_seller_status
+      visibility = VISIBLE
+    }
   }
 
   private fun setSellerError(message: String?) {
