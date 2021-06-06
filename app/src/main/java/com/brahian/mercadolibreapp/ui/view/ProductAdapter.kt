@@ -2,6 +2,7 @@ package com.brahian.mercadolibreapp.ui.view
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -36,8 +37,9 @@ class ProductAdapter(private val dataSet: List<Product>, private val glide : Req
         glide.load(it.thumbnail).placeholder(R.drawable.ic_launcher_background).into(image)
         title.text = it.title
         price.formatToCurrency(it.price)
-        shipping.text =
-          if (it.shipping?.free_shipping == true) "Free shipping!" else "No free shipping"
+        if (it.shipping?.free_shipping == true) {
+          shipping.text = "Free shipping"
+        } else shipping.visibility = GONE
         location.text =
           "${dataSet[position].seller_address?.city?.name} - ${dataSet[position].seller_address?.state?.name}"
         row.setOnClickListener {

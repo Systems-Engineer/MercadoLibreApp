@@ -1,10 +1,13 @@
 package com.brahian.mercadolibreapp.ui
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.brahian.mercadolibreapp.R
@@ -31,7 +34,24 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     setObservers()
-    viewModel.setStateEvent(MainStateEvent.GetProduct("Xiaomi Mi Band"))
+    viewModel.setStateEvent(MainStateEvent.GetProduct("Tecnologia"))
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.options_menu, menu)
+    (menu.findItem(R.id.search).actionView as SearchView).apply {
+      queryHint = getString(R.string.search_title)
+      setOnQueryTextListener(object : OnQueryTextListener {
+        override fun onQueryTextChange(newText: String): Boolean {
+          return false
+        }
+        override fun onQueryTextSubmit(query: String): Boolean {
+          viewModel.setStateEvent(MainStateEvent.GetProduct(query, true))
+          return false
+        }
+      })
+    }
+    return true
   }
 
   private fun setObservers() {
