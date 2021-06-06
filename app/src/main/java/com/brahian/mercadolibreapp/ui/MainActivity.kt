@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     setObservers()
-    viewModel.setStateEvent(MainStateEvent.GetProductEvents("Xiaomi Mi Band"))
+    viewModel.setStateEvent(MainStateEvent.GetProduct("Xiaomi Mi Band"))
   }
 
   private fun setObservers() {

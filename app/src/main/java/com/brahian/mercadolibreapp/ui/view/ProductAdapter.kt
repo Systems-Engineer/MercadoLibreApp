@@ -17,7 +17,7 @@ class ProductAdapter(private val dataSet: List<Product>, private val glide : Req
   class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val row: ConstraintLayout = view.findViewById(R.id.row_layout)
     val image: ImageView = view.findViewById(R.id.imageview)
-    val title: TextView = view.findViewById(R.id.title_textview)
+    val title: TextView = view.findViewById(R.id.textview_title)
     val price: TextView = view.findViewById(R.id.price_textview)
     val shipping: TextView = view.findViewById(R.id.shipping_textview)
     val location: TextView = view.findViewById(R.id.location_textview)

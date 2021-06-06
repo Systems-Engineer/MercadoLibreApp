@@ -5,26 +5,54 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.brahian.mercadolibreapp.model.Currency
 import com.brahian.mercadolibreapp.model.Product
+import com.brahian.mercadolibreapp.model.Seller
+import com.brahian.mercadolibreapp.repository.MercadoLibreRepository
 import com.brahian.mercadolibreapp.util.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-  private val savedStateHandle: SavedStateHandle
+  private val savedStateHandle: SavedStateHandle,
+  private val mercadoLibreRepository: MercadoLibreRepository
 ) : ViewModel() {
 
-  private val _dataState: MutableLiveData<DataState<Product>> = MutableLiveData()
-  val dataState: LiveData<DataState<Product>>
-    get() = _dataState
+  private val _productDataState: MutableLiveData<DataState<Product>> = MutableLiveData()
+  val productDataState: LiveData<DataState<Product>>
+    get() = _productDataState
 
-  fun setStateEvent(state: DetailStateEvent) {
+  private val _currencyDataState: MutableLiveData<DataState<Currency>> = MutableLiveData()
+  val currencyDataState: LiveData<DataState<Currency>>
+    get() = _currencyDataState
+
+  private val _sellerDataState: MutableLiveData<DataState<Seller>> = MutableLiveData()
+  val sellerDataState: LiveData<DataState<Seller>>
+    get() = _sellerDataState
+
+  fun setStateEvent(event: DetailStateEvent) {
     viewModelScope.launch {
-      when (state) {
-        is DetailStateEvent.GetProductDetailEvent -> {
-          if (_dataState.value == null) _dataState.postValue(DataState.Success(state.product))
+      when (event) {
+        is DetailStateEvent.GetProductDetail -> {
+          if (_productDataState.value == null) _productDataState.postValue(DataState.Success(event.product))
+        }
+        is DetailStateEvent.GetCurrency -> {
+          if (_currencyDataState.value == null) {
+            mercadoLibreRepository.getCurrency(event.currencyId).onEach {
+              _currencyDataState.value = it
+            }.launchIn(viewModelScope)
+          }
+        }
+        is DetailStateEvent.GetSeller -> {
+          if (_sellerDataState.value == null) {
+            mercadoLibreRepository.getSeller(event.sellerId).onEach {
+              _sellerDataState.value = it
+            }.launchIn(viewModelScope)
+          }
         }
       }
     }
@@ -32,5 +60,7 @@ class DetailViewModel @Inject constructor(
 }
 
 sealed class DetailStateEvent {
-  data class GetProductDetailEvent(val product : Product) : DetailStateEvent()
+  data class GetProductDetail(val product : Product) : DetailStateEvent()
+  data class GetCurrency(val currencyId : String) : DetailStateEvent()
+  data class GetSeller(val sellerId : String) : DetailStateEvent()
 }

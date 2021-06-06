@@ -12,7 +12,6 @@ data class ProductSearchResponse (
 data class Product (
   val id : String?,
   val title : String?,
-  val seller : Seller?,
   val price : Double?,
   val currency_id : String?,
   val available_quantity: Int?,
@@ -22,24 +21,9 @@ data class Product (
   val seller_address : Address?,
   val shipping : Shipping?,
   val thumbnail : String?,
-  val attributes : List<Attribute>?
-  ) : Parcelable
-
-@Parcelize
-data class Seller (
-  val eshop : Eshop?,
-  val seller_reputation : Reputation?
-  ) : Parcelable
-
-@Parcelize
-data class Reputation (
-  val power_seller_status : String?
-  ) : Parcelable
-
-@Parcelize
-data class Eshop (
-  val nick_name : String?,
-  val eshop_logo_url : String?
+  val attributes : List<Attribute>?,
+  val domain_id : String?,
+  val seller : Seller?
   ) : Parcelable
 
 @Parcelize
@@ -53,7 +37,6 @@ data class Address (
 data class Country (
   val name : String?
 ) : Parcelable
-
 
 @Parcelize
 data class State (

@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(
   fun setStateEvent(event: MainStateEvent) {
     viewModelScope.launch {
       when (event) {
-        is MainStateEvent.GetProductEvents -> {
+        is MainStateEvent.GetProduct -> {
           if (dataState.value == null) {
             mercadoLibreRepository.getProducts(event.query).onEach {
               _dataState.value = it
@@ -40,5 +40,5 @@ class MainViewModel @Inject constructor(
 }
 
 sealed class MainStateEvent {
-  data class GetProductEvents(val query : String) : MainStateEvent()
+  data class GetProduct(val query : String) : MainStateEvent()
 }
