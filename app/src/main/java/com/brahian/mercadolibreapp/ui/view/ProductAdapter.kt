@@ -12,6 +12,7 @@ import com.brahian.mercadolibreapp.R
 import com.brahian.mercadolibreapp.model.Product
 import com.brahian.mercadolibreapp.util.formatToCurrency
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class ProductAdapter(private val dataSet: List<Product>, private val glide : RequestManager, private val onTap : (Product)-> Unit) :
   RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
@@ -34,7 +35,7 @@ class ProductAdapter(private val dataSet: List<Product>, private val glide : Req
   override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
     viewHolder.apply {
       dataSet[position].let {
-        glide.load(it.thumbnail).placeholder(R.drawable.ic_launcher_background).into(image)
+        glide.load(it.thumbnail).placeholder(R.drawable.ic_launcher_background).transition(DrawableTransitionOptions.withCrossFade()).into(image)
         title.text = it.title
         price.formatToCurrency(it.price)
         if (it.shipping?.free_shipping == true) {

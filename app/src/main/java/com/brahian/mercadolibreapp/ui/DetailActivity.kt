@@ -20,6 +20,7 @@ import com.brahian.mercadolibreapp.util.formatToCurrency
 import com.brahian.mercadolibreapp.viewmodel.DetailStateEvent
 import com.brahian.mercadolibreapp.viewmodel.DetailViewModel
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.layout_seller_info.*
@@ -89,7 +90,8 @@ class DetailActivity : AppCompatActivity() {
     textview_price.formatToCurrency(product.price)
     formatShippingAndMercadoPagoInfo(product)
     textview_stock.text = "Stock: ${product.available_quantity}"
-    glide.load(product.thumbnail).placeholder(R.drawable.ic_launcher_background).into(imageview_product)
+    glide.load(product.thumbnail).placeholder(R.drawable.ic_launcher_background).transition(
+      DrawableTransitionOptions.withCrossFade()).into(imageview_product)
     setProductAttributes(product.attributes)
   }
 
@@ -120,7 +122,7 @@ class DetailActivity : AppCompatActivity() {
   private fun setSeller(seller : Seller) {
     progressbar_seller.visibility = GONE
     imageview_eshop.visibility = VISIBLE
-    glide.load(seller.logo).placeholder(R.drawable.ic_launcher_background).into(imageview_eshop)
+    glide.load(seller.logo).placeholder(R.mipmap.ic_launcher).transition(DrawableTransitionOptions.withCrossFade()).into(imageview_eshop)
     textview_seller_name.apply {
       text = seller.nickname
       visibility = VISIBLE
