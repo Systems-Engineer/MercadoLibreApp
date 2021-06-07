@@ -15,7 +15,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerCrop"
+        style="@style/ImageCenter"
         android:visibility="invisible"
         tools:src="@drawable/ic_launcher_background"/>
 
@@ -51,7 +51,7 @@
         android:id="@+id/progressbar_seller"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#80FFFFFF"
+        style="@style/TransparentBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

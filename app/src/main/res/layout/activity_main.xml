@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_large"
             android:text="@string/error_message"
-            android:textStyle="bold"
+            style="@style/TextStrong"
             android:gravity="center"
             android:layout_marginTop="@dimen/spacing_small"/>
 
@@ -48,7 +48,7 @@
         android:id="@+id/progressbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#80FFFFFF"
+        style="@style/TransparentBackground"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
