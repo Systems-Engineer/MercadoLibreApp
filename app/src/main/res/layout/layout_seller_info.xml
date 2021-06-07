@@ -33,7 +33,7 @@
             android:id="@+id/textview_seller_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_medium"
             android:visibility="invisible"
             tools:text="Nickname de vendedor"/>
 
@@ -41,7 +41,7 @@
             android:id="@+id/textview_seller_reputation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_medium"
             android:visibility="invisible"
             tools:text="Sabaneta - Antioquia"/>
 
