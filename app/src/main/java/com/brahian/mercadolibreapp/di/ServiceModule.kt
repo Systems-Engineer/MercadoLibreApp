@@ -23,9 +23,9 @@ object ServiceModule {
 
   @Singleton
   @Provides
-  fun provideRetrofit(gson: Gson): Retrofit.Builder {
+  fun provideRetrofit(baseUrl: String, gson: Gson): Retrofit.Builder {
     return Retrofit.Builder()
-      .baseUrl("https://api.mercadolibre.com/")
+      .baseUrl(baseUrl)
       .addConverterFactory(GsonConverterFactory.create(gson))
   }
 
