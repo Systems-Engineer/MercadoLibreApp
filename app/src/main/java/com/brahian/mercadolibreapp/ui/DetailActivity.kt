@@ -104,7 +104,7 @@ class DetailActivity : AppCompatActivity() {
       adapter = AttributeAdapter(attributes ?: listOf())
       addItemDecoration(
         DividerItemDecoration(this@DetailActivity, DividerItemDecoration.VERTICAL).apply {
-          AppCompatResources.getDrawable(this@DetailActivity, R.drawable.divider_layout)?.let { setDrawable(it) }
+          AppCompatResources.getDrawable(this@DetailActivity, R.drawable.layout_divider)?.let { setDrawable(it) }
         }
       )
     }

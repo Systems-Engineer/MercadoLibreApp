@@ -95,7 +95,7 @@
             android:id="@+id/textview_features"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/features_product"
+            android:text="@string/attributes_product"
             android:layout_marginBottom="4dp"
             android:layout_marginHorizontal="16dp"
             android:textStyle="bold"
@@ -105,7 +105,8 @@
             android:id="@+id/recyclerview_attributes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="never"/>
+            android:overScrollMode="never"
+            android:layout_marginBottom="16dp"/>
 
     </LinearLayout>
 

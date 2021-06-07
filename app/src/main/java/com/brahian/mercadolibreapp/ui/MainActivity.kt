@@ -1,5 +1,7 @@
 package com.brahian.mercadolibreapp.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -86,7 +88,7 @@ class MainActivity : AppCompatActivity() {
       }
       addItemDecoration(
         DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL).apply {
-          AppCompatResources.getDrawable(this@MainActivity, R.drawable.divider_layout)?.let { setDrawable(it) }
+          AppCompatResources.getDrawable(this@MainActivity, R.drawable.layout_divider)?.let { setDrawable(it) }
         }
       )
       visibility = VISIBLE
@@ -94,7 +96,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun setError(message: String?) {
-    textview_error.visibility = VISIBLE
+    layout_error.visibility = VISIBLE
     recyclerview.visibility = GONE
     Log.e(TAG, "setError: Got error while trying to fetch products: $message")
   }
@@ -102,7 +104,14 @@ class MainActivity : AppCompatActivity() {
   private fun setLoading(loading: Boolean) {
     if (loading) {
       progressbar.visibility = VISIBLE
-      textview_error.visibility = GONE
+      layout_error.visibility = GONE
     } else progressbar.visibility = GONE
+  }
+
+  companion object {
+    fun start(context : Context) {
+      val intent = Intent(context, MainActivity::class.java)
+      context.startActivity(intent)
+    }
   }
 }
