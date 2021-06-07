@@ -1,9 +1,9 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="16dp"
-    android:insetRight="16dp" >
+    android:insetLeft="@dimen/spacing_large"
+    android:insetRight="@dimen/spacing_large" >
 
     <shape>
-        <size android:height="1dp"/>
+        <size android:height="@dimen/divider_size"/>
         <solid android:color="#CECECE" />
     </shape>
 

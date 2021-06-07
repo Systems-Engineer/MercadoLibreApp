@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="@dimen/spacing_small"
     app:layout_constraintTop_toBottomOf="@id/textview_stock">
 
     <ImageView
         android:id="@+id/imageview_eshop"
-        android:layout_width="44dp"
+        android:layout_width="@dimen/image_medium_size"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
             android:id="@+id/textview_seller_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/spacing_large"
             android:visibility="invisible"
             tools:text="Nickname de vendedor"/>
 
@@ -41,7 +41,7 @@
             android:id="@+id/textview_seller_reputation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/spacing_large"
             android:visibility="invisible"
             tools:text="Sabaneta - Antioquia"/>
 
