@@ -34,15 +34,15 @@ class ProductAdapter(private val dataSet: List<Product>, private val glide : Req
 
   override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
     viewHolder.apply {
+      val context = viewHolder.itemView.context
       dataSet[position].let {
         glide.load(it.thumbnail).placeholder(R.drawable.ic_launcher_background).transition(DrawableTransitionOptions.withCrossFade()).into(image)
         title.text = it.title
         price.formatToCurrency(it.price)
         if (it.shipping?.free_shipping == true) {
-          shipping.text = "Free shipping"
+          shipping.text = context.getString(R.string.free_shipping)
         } else shipping.visibility = GONE
-        location.text =
-          "${dataSet[position].seller_address?.city?.name} - ${dataSet[position].seller_address?.state?.name}"
+        location.text = context.getString(R.string.address, it.seller_address?.city?.name, it.seller_address?.state?.name)
         row.setOnClickListener {
           onTap.invoke(dataSet[position])
         }

@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     setObservers()
-    viewModel.setStateEvent(MainStateEvent.GetProduct("Tecnologia"))
+    viewModel.setStateEvent(MainStateEvent.GetProduct(getString(R.string.tecnologia)))
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -25,7 +25,7 @@ class AttributeAdapter(private val dataSet: List<Attribute>) :
   override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
     viewHolder.apply {
       dataSet[position].let {
-        name.text = it.name
+        name.text = viewHolder.itemView.context.getString(R.string.value_name, it.name)
         value.text = it.value_name
       }
     }

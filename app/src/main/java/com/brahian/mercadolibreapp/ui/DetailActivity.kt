@@ -85,11 +85,11 @@ class DetailActivity : AppCompatActivity() {
   }
 
   private fun setDetail(product: Product) {
-    textview_condition_sold.text = "${product.condition} | ${product.sold_quantity} sold"
+    textview_condition_sold.text = getString(R.string.condition_sold, product.condition, product.sold_quantity.toString())
     textview_title.text = product.title
     textview_price.formatToCurrency(product.price)
     formatShippingAndMercadoPagoInfo(product)
-    textview_stock.text = "Stock: ${product.available_quantity}"
+    textview_stock.text = getString(R.string.stock, product.available_quantity.toString())
     glide.load(product.thumbnail).placeholder(R.drawable.ic_launcher_background).transition(
       DrawableTransitionOptions.withCrossFade()).into(imageview_product)
     setProductAttributes(product.attributes)
@@ -110,10 +110,12 @@ class DetailActivity : AppCompatActivity() {
   private fun formatShippingAndMercadoPagoInfo(product : Product) {
     val shippingAndPago = StringBuilder()
     if (product.shipping?.free_shipping == true) {
-      shippingAndPago.append("Free Shipping")
-      if (product.accepts_mercadopago == true) shippingAndPago.append(" | Accepts MercadoPago")
+      shippingAndPago.append(getString(
+        if (product.accepts_mercadopago == true) R.string.free_shipping_mercadopago
+        else R.string.free_shipping)
+      )
     } else if (product.accepts_mercadopago == true) {
-      shippingAndPago.append("Accepts MercadoPago")
+      shippingAndPago.append(getString(R.string.accepts_mercadopago))
     }
     if (shippingAndPago.toString().isEmpty() || shippingAndPago.toString().isBlank()) textview_shipping_pago.visibility = GONE
     else textview_shipping_pago.text = shippingAndPago.toString()

@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">MercadoLibre</string>
     <string name="search_title">Search for products</string>
+    <string name="tecnologia">Tecnologia</string>
+    <string name="condition_sold">%1$s | %2$s sold</string>
+    <string name="stock">Stock: %1$s</string>
+    <string name="free_shipping">Free Shipping</string>
+    <string name="free_shipping_mercadopago">Free Shipping | Accepts MercadoPago</string>
+    <string name="accepts_mercadopago">Accepts MercadoPago</string>
+    <string name="address">%1$s - %2$s</string>
+    <string name="value_name">%1$s:</string>
+    <string name="features_product">Features of product:</string>
 </resources>
