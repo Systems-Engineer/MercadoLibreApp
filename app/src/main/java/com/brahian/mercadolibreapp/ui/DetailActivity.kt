@@ -18,6 +18,7 @@ import com.brahian.mercadolibreapp.ui.view.AttributeAdapter
 import com.brahian.mercadolibreapp.util.DataState.*
 import com.brahian.mercadolibreapp.util.formatToCurrency
 import com.brahian.mercadolibreapp.util.setTextAndCapitalize
+import com.brahian.mercadolibreapp.util.setVisibleText
 import com.brahian.mercadolibreapp.viewmodel.DetailStateEvent
 import com.brahian.mercadolibreapp.viewmodel.DetailViewModel
 import com.bumptech.glide.RequestManager
@@ -47,7 +48,7 @@ class DetailActivity : AppCompatActivity() {
       viewModel.setStateEvent(DetailStateEvent.GetProductDetail(it))
       viewModel.setStateEvent(DetailStateEvent.GetSeller(it.seller?.id ?: ""))
     } ?: run {
-      // TODO show snackbar error
+      finish()
       Log.e(TAG, "onCreate: Failed creating view due to having a null product as argument")
     }
   }
@@ -124,25 +125,22 @@ class DetailActivity : AppCompatActivity() {
   }
 
   private fun setSeller(seller : Seller) {
-    progressbar_seller.visibility = GONE
     imageview_eshop.visibility = VISIBLE
     glide.load(seller.logo).placeholder(R.mipmap.ic_launcher).transition(DrawableTransitionOptions.withCrossFade()).into(imageview_eshop)
     textview_seller_name.apply {
-      text = seller.nickname
-      visibility = VISIBLE
+      setVisibleText(seller.nickname)
     }
     textview_seller_reputation.apply{
       setTextAndCapitalize(seller.seller_reputation?.power_seller_status)
-      visibility = VISIBLE
     }
   }
 
   private fun setSellerError(message: String?) {
-    // no-op
+    layout_seller_info.visibility = GONE
   }
 
   private fun setSellerLoading(loading: Boolean) {
-    // no-op
+    progressbar_seller.visibility = if (loading) VISIBLE else GONE
   }
 
   companion object {

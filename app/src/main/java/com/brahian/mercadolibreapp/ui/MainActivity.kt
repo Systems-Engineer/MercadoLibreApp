@@ -1,8 +1,9 @@
 package com.brahian.mercadolibreapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
-import android.view.View
+import android.view.View.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -25,6 +26,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
   private val viewModel: MainViewModel by viewModels()
+
+  private val TAG = MainActivity::class.java.name
 
   @Inject
   lateinit var glide : RequestManager
@@ -86,14 +89,20 @@ class MainActivity : AppCompatActivity() {
           AppCompatResources.getDrawable(this@MainActivity, R.drawable.divider_layout)?.let { setDrawable(it) }
         }
       )
+      visibility = VISIBLE
     }
   }
 
   private fun setError(message: String?) {
-    // TODO add logic for errors
+    textview_error.visibility = VISIBLE
+    recyclerview.visibility = GONE
+    Log.e(TAG, "setError: Got error while trying to fetch products: $message")
   }
 
   private fun setLoading(loading: Boolean) {
-    progressbar.visibility = if (loading) View.VISIBLE else View.GONE
+    if (loading) {
+      progressbar.visibility = VISIBLE
+      textview_error.visibility = GONE
+    } else progressbar.visibility = GONE
   }
 }
