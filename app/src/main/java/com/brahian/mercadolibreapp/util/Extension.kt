@@ -8,3 +8,7 @@ fun TextView.formatToCurrency(value : Double?) {
     val format: NumberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
     text = format.format(value)
 }
+
+fun TextView.setTextAndCapitalize(textValue : String?) {
+    text = textValue?.capitalize(Locale.getDefault())
+}

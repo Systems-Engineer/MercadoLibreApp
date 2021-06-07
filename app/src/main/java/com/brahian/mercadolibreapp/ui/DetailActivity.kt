@@ -17,6 +17,7 @@ import com.brahian.mercadolibreapp.model.Seller
 import com.brahian.mercadolibreapp.ui.view.AttributeAdapter
 import com.brahian.mercadolibreapp.util.DataState.*
 import com.brahian.mercadolibreapp.util.formatToCurrency
+import com.brahian.mercadolibreapp.util.setTextAndCapitalize
 import com.brahian.mercadolibreapp.viewmodel.DetailStateEvent
 import com.brahian.mercadolibreapp.viewmodel.DetailViewModel
 import com.bumptech.glide.RequestManager
@@ -24,6 +25,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.layout_seller_info.*
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -85,7 +87,7 @@ class DetailActivity : AppCompatActivity() {
   }
 
   private fun setDetail(product: Product) {
-    textview_condition_sold.text = getString(R.string.condition_sold, product.condition, product.sold_quantity.toString())
+    textview_condition_sold.setTextAndCapitalize(getString(R.string.condition_sold, product.condition, product.sold_quantity.toString()))
     textview_title.text = product.title
     textview_price.formatToCurrency(product.price)
     formatShippingAndMercadoPagoInfo(product)
@@ -130,7 +132,7 @@ class DetailActivity : AppCompatActivity() {
       visibility = VISIBLE
     }
     textview_seller_reputation.apply{
-      text = seller.seller_reputation?.power_seller_status
+      setTextAndCapitalize(seller.seller_reputation?.power_seller_status)
       visibility = VISIBLE
     }
   }
