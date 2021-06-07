@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingVertical="@dimen/spacing_medium"
     android:paddingHorizontal="@dimen/spacing_large"
-    android:id="@+id/row_layout"
+    android:id="@+id/layout_row"
     android:background="?attr/selectableItemBackground">
 
     <ImageView
@@ -38,7 +38,7 @@
             tools:text="Title"/>
 
         <TextView
-            android:id="@+id/price_textview"
+            android:id="@+id/textview_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
@@ -46,14 +46,14 @@
             tools:text="Price"/>
 
         <TextView
-            android:id="@+id/shipping_textview"
+            android:id="@+id/textview_shipping"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
             tools:text="Shipping"/>
 
         <TextView
-            android:id="@+id/location_textview"
+            android:id="@+id/textview_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"

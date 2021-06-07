@@ -57,7 +57,12 @@ class MercadoLibreAppTest {
             DispatcherRule(
               "/sites/MCO/search?q=Tecnologia",
               200,
-              "results.json"
+              "tecnologia_results.json"
+            ),
+            DispatcherRule(
+              "/sites/MCO/search?q=gatos",
+              200,
+              "gatos_results.json"
             ),
             DispatcherRule(
               "/users/556503088",
@@ -68,6 +73,20 @@ class MercadoLibreAppTest {
         }
         DispatcherTag.MAIN_FAIL -> {
           MockServerDispatcher().ErrorDispatcher()
+        }
+        DispatcherTag.DETAIL_FAIL -> {
+          MockServerDispatcher().RequestDispatcher(listOf(
+            DispatcherRule(
+              "/sites/MCO/search?q=Tecnologia",
+              200,
+              "tecnologia_results.json"
+            ),
+            DispatcherRule(
+              "/users/556503088",
+              400,
+              "seller.json"
+            )
+          ))
         }
       }
   }
@@ -92,12 +111,21 @@ class MercadoLibreAppTest {
   }
 
   @Test
+  fun testMainActivityLoadsAndSearchIsSuccessful() {
+    setDispatcher(DispatcherTag.MAIN_SUCCESS)
+    MainScreen.waitForScreen()
+    MainScreen.searchForProduct("gatos")
+    MainScreen.waitForScreen()
+  }
+
+  @Test
   fun testDetailActivityLoads() {
     setDispatcher(DispatcherTag.MAIN_SUCCESS)
     MainScreen.waitForScreen()
-    MainScreen.tapOnProduct()
+    MainScreen.tapOnProduct(0)
     DetailScreen.waitForScreen()
-    DetailScreen.verifySellerLoads()
+    DetailScreen.verifyDetails("New | 1 sold", "Parlante LG Xboom Go Pl7 Portátil Con Bluetooth Negra ", "Free Shipping | Accepts MercadoPago")
+    DetailScreen.verifySellerLoads("HOMESOLUTIONSBQ", "gold".capitalize())
   }
 
   @Test
@@ -106,9 +134,20 @@ class MercadoLibreAppTest {
     MainScreen.waitForScreenToFail(context.getString(R.string.error_message))
   }
 
+  @Test
+  fun testDetailActivityFailsToLoadSellerInfo() {
+    setDispatcher(DispatcherTag.DETAIL_FAIL)
+    MainScreen.waitForScreen()
+    MainScreen.tapOnProduct(0)
+    DetailScreen.waitForScreen()
+    DetailScreen.verifyDetails("New | 1 sold", "Parlante LG Xboom Go Pl7 Portátil Con Bluetooth Negra ", "Free Shipping | Accepts MercadoPago")
+    DetailScreen.verifySellerDidNotLoad()
+  }
+
 }
 
 enum class DispatcherTag {
   MAIN_SUCCESS,
-  MAIN_FAIL
+  MAIN_FAIL,
+  DETAIL_FAIL
 }

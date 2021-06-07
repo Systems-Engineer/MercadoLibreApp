@@ -1,7 +1,9 @@
 package com.brahian.mercadolibreapp.screen
 
+import android.view.KeyEvent
+import android.widget.AutoCompleteTextView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -11,6 +13,7 @@ import com.brahian.mercadolibreapp.util.Wait
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 
+
 object MainScreen {
 
     private val recyclerView = withId(R.id.recyclerview)
@@ -18,6 +21,7 @@ object MainScreen {
     private val progressBar = withId(R.id.progressbar)
     private val imageError = withId(R.id.imageview_error)
     private val textError = withId(R.id.textview_error)
+    private val searchView = withId(R.id.search)
 
     fun waitForScreen(){
         onView(progressBar).check(matches(isDisplayed()))
@@ -35,9 +39,15 @@ object MainScreen {
         onView(textError).check(matches(allOf(isDisplayed(), withText(error))))
     }
 
-    fun tapOnProduct() {
+    fun tapOnProduct(position : Int) {
         onView(recyclerView).perform(RecyclerViewActions
-            .actionOnItemAtPosition<ProductAdapter.ViewHolder>(0, click()))
+            .actionOnItemAtPosition<ProductAdapter.ViewHolder>(position, click()))
+    }
+
+    fun searchForProduct(query : String) {
+        onView(searchView).perform(click())
+        onView(isAssignableFrom(AutoCompleteTextView::class.java)).perform(typeText(query))
+        onView(isAssignableFrom(AutoCompleteTextView::class.java)).perform(pressKey(KeyEvent.KEYCODE_ENTER))
     }
 
 }
