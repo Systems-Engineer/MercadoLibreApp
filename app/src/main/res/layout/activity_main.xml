@@ -29,11 +29,13 @@
         android:visibility="gone">
 
         <ImageView
+            android:id="@+id/imageview_error"
             android:layout_width="@dimen/image_medium_size"
             android:layout_height="@dimen/image_medium_size"
             android:src="@drawable/ic_mood_bad" />
 
         <TextView
+            android:id="@+id/textview_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_large"

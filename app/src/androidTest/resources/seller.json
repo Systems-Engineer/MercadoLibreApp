@@ -1,0 +1,41 @@
+{
+  "id": 556503088,
+  "nickname": "HOMESOLUTIONSBQ",
+  "registration_date": "2020-04-29T12:31:41.000-04:00",
+  "country_id": "CO",
+  "address": {
+    "city": "Barranquilla",
+    "state": "CO-ATL"
+  },
+  "user_type": "normal",
+  "tags": [
+    "normal",
+    "mshops"
+  ],
+  "logo": null,
+  "points": 177,
+  "site_id": "MCO",
+  "permalink": "http://perfil.mercadolibre.com.co/HOMESOLUTIONSBQ",
+  "seller_reputation": {
+    "level_id": "5_green",
+    "power_seller_status": "gold",
+    "transactions": {
+      "canceled": 51,
+      "completed": 1168,
+      "period": "historic",
+      "ratings": {
+        "negative": 0.01,
+        "neutral": 0,
+        "positive": 0.99
+      },
+      "total": 1219
+    }
+  },
+  "buyer_reputation": {
+    "tags": [
+    ]
+  },
+  "status": {
+    "site_status": "active"
+  }
+}

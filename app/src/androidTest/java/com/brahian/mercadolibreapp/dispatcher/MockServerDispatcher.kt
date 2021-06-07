@@ -22,7 +22,7 @@ class MockServerDispatcher {
                 }
             } catch (ex : Exception) {
                 MockResponse().setResponseCode(400)
-            }.setBodyDelay(1, TimeUnit.SECONDS)
+            }.setBodyDelay(3, TimeUnit.SECONDS)
         }
     }
 
@@ -30,9 +30,8 @@ class MockServerDispatcher {
      * Return error response from mock server
      */
     internal inner class ErrorDispatcher : Dispatcher() {
-
         override fun dispatch(request: RecordedRequest): MockResponse {
-            return MockResponse().setResponseCode(400)
+            return MockResponse().setResponseCode(400).setHeadersDelay(1, TimeUnit.SECONDS)
         }
     }
 
