@@ -52,6 +52,7 @@ dependencies {
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1'
 
     // Retrofit
     def retrofit_version = '2.9.0'
@@ -68,13 +69,16 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
-    // Test
+    // Test core
     androidTestImplementation "androidx.test:core:${test_version}"
     androidTestImplementation "androidx.test.ext:truth:${test_version}"
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    implementation "androidx.arch.core:core-testing:2.1.0"
+
+    // MockK
+    testImplementation "io.mockk:mockk:1.10.6"
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'junit:junit:4.13.2'
+    implementation 'junit:junit:4.13.2'
     androidTestImplementation "androidx.test:runner:${junit_runner_version}"
     androidTestImplementation "androidx.test:rules:${junit_runner_version}"
 
