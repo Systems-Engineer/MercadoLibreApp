@@ -11,4 +11,5 @@
     <string name="value_name">%1$s:</string>
     <string name="attributes_product">Attributes of product:</string>
     <string name="error_message">We couldn\'t retrieve the data, please check your internet connection and try again.</string>
+    <string name="no_results_found">We couldn\'t find anything related in our listings, please try with another keyword.</string>
 </resources>

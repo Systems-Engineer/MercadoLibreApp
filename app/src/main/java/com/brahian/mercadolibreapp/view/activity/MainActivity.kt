@@ -69,11 +69,15 @@ class MainActivity : AppCompatActivity() {
         when (it) {
           is DataState.Success -> {
             setLoading(false)
-            setRecyclerView(it.data)
+            if (it.data.results.isNullOrEmpty()) {
+              setError(getString(R.string.no_results_found))
+            } else {
+              setRecyclerView(it.data)
+            }
           }
           is DataState.Error -> {
             setLoading(false)
-            setError(it.exception.message)
+            setError(it.exception.message, true)
           }
           is DataState.Loading -> {
             setLoading(true)
@@ -98,10 +102,15 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  private fun setError(message: String?) {
+  private fun setError(message: String?, isException: Boolean = false) {
+    if (isException) {
+      Log.e(TAG, "setError: Got error while trying to fetch products: $message")
+      textview_error.text = getString(R.string.error_message)
+    } else {
+      textview_error.text = message
+    }
     layout_error.visibility = VISIBLE
     recyclerview.visibility = GONE
-    Log.e(TAG, "setError: Got error while trying to fetch products: $message")
   }
 
   private fun setLoading(loading: Boolean) {
