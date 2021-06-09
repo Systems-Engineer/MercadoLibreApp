@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp.ui
+package com.brahian.mercadolibreapp.view.activity
 
 import android.content.Context
 import android.content.Intent
@@ -14,16 +14,19 @@ import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.model.ProductSearchResponse
-import com.brahian.mercadolibreapp.ui.view.ProductAdapter
-import com.brahian.mercadolibreapp.util.DataState
-import com.brahian.mercadolibreapp.viewmodel.MainStateEvent
-import com.brahian.mercadolibreapp.viewmodel.MainViewModel
+import com.brahian.mercadolibreapp.model.response.ProductSearchResponse
+import com.brahian.mercadolibreapp.view.customview.ProductAdapter
+import com.brahian.mercadolibreapp.viewmodel.util.DataState
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.MainStateEvent
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.MainViewModel
 import com.bumptech.glide.RequestManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
+/**
+ * Activity for searching for products and displaying them on a list
+ */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

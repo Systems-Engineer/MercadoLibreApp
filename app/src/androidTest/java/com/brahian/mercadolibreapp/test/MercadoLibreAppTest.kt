@@ -5,12 +5,12 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.di.BaseUrlModule
+import com.brahian.mercadolibreapp.di.module.BaseUrlModule
 import com.brahian.mercadolibreapp.dispatcher.DispatcherRule
 import com.brahian.mercadolibreapp.dispatcher.MockServerDispatcher
 import com.brahian.mercadolibreapp.screen.DetailScreen
 import com.brahian.mercadolibreapp.screen.MainScreen
-import com.brahian.mercadolibreapp.ui.MainActivity
+import com.brahian.mercadolibreapp.view.activity.MainActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +26,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import javax.inject.Singleton
 
+/**
+ * Instrumentation tests for both MainActivity and DetailActivity
+ */
 @UninstallModules(BaseUrlModule::class)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
@@ -49,6 +52,9 @@ class MercadoLibreAppTest {
     fun provideUrl(): String = "http://localhost:8080/"
   }
 
+  /**
+   * mocking the endpoint responses
+   */
   private fun setDispatcher(dispatcherTag : DispatcherTag) {
     mockServer.dispatcher =
       when (dispatcherTag) {

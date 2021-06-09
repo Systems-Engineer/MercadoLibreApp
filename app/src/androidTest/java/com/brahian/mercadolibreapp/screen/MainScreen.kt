@@ -8,8 +8,8 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.ui.view.ProductAdapter
-import com.brahian.mercadolibreapp.util.Wait
+import com.brahian.mercadolibreapp.view.customview.ProductAdapter
+import com.brahian.mercadolibreapp.util.WaitFor
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 
@@ -25,14 +25,14 @@ object MainScreen {
 
     fun waitForScreen(){
         onView(progressBar).check(matches(isDisplayed()))
-        Wait(progressBar).until(matches(not(isDisplayed())))
+        WaitFor(progressBar).until(matches(not(isDisplayed())))
         onView(recyclerView).check(matches(isDisplayed()))
         onView(layoutError).check(matches(not(isDisplayed())))
     }
 
     fun waitForScreenToFail(error : String) {
         onView(progressBar).check(matches(isDisplayed()))
-        Wait(progressBar).until(matches(not(isDisplayed())))
+        WaitFor(progressBar).until(matches(not(isDisplayed())))
         onView(recyclerView).check(matches(not(isDisplayed())))
         onView(layoutError).check(matches(isDisplayed()))
         onView(imageError).check(matches(isDisplayed()))

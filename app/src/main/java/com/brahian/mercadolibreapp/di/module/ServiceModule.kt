@@ -1,6 +1,6 @@
-package com.brahian.mercadolibreapp.di
+package com.brahian.mercadolibreapp.di.module
 
-import com.brahian.mercadolibreapp.service.MercadoLibreAPIService
+import com.brahian.mercadolibreapp.model.service.MercadoLibreAPIService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

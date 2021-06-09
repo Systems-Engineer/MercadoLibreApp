@@ -1,7 +1,11 @@
-package com.brahian.mercadolibreapp.model
+package com.brahian.mercadolibreapp.model.response
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+
+/**
+ * Data objects for BE responses related to products info
+ */
 
 @Parcelize
 data class ProductSearchResponse (

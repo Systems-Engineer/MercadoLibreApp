@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp
+package com.brahian.mercadolibreapp.test
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.brahian.mercadolibreapp.util.MainCoroutineRule

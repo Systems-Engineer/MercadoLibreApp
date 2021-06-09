@@ -1,14 +1,13 @@
-package com.brahian.mercadolibreapp
+package com.brahian.mercadolibreapp.test
 
 import androidx.lifecycle.Observer
-import com.brahian.mercadolibreapp.model.Product
-import com.brahian.mercadolibreapp.model.ProductSearchResponse
-import com.brahian.mercadolibreapp.model.Seller
-import com.brahian.mercadolibreapp.repository.MercadoLibreRepository
-import com.brahian.mercadolibreapp.service.MercadoLibreAPIService
-import com.brahian.mercadolibreapp.util.DataState
-import com.brahian.mercadolibreapp.viewmodel.DetailStateEvent
-import com.brahian.mercadolibreapp.viewmodel.DetailViewModel
+import com.brahian.mercadolibreapp.model.repository.MercadoLibreRepository
+import com.brahian.mercadolibreapp.model.response.Product
+import com.brahian.mercadolibreapp.model.response.Seller
+import com.brahian.mercadolibreapp.model.service.MercadoLibreAPIService
+import com.brahian.mercadolibreapp.viewmodel.util.DataState
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.DetailStateEvent
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.DetailViewModel
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.*
@@ -17,7 +16,7 @@ import org.junit.Test
 import java.lang.Exception
 
 /**
- * Unit tests para los DetailViewModel
+ * Unit tests for DetailViewModel
  */
 @ExperimentalCoroutinesApi
 class DetailViewModelTest : BaseTest() {

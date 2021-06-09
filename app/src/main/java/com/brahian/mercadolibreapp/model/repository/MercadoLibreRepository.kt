@@ -1,9 +1,9 @@
-package com.brahian.mercadolibreapp.repository
+package com.brahian.mercadolibreapp.model.repository
 
-import com.brahian.mercadolibreapp.model.ProductSearchResponse
-import com.brahian.mercadolibreapp.model.Seller
-import com.brahian.mercadolibreapp.service.MercadoLibreAPIService
-import com.brahian.mercadolibreapp.util.DataState
+import com.brahian.mercadolibreapp.model.response.ProductSearchResponse
+import com.brahian.mercadolibreapp.model.response.Seller
+import com.brahian.mercadolibreapp.model.service.MercadoLibreAPIService
+import com.brahian.mercadolibreapp.viewmodel.util.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
@@ -13,12 +13,12 @@ class MercadoLibreRepository @Inject constructor(
   private val mercadoLibreAPIService: MercadoLibreAPIService
 ) {
 
-  private val COUNTRY_ID = "MCO"
+  private val countryId = "MCO"
 
   suspend fun getProducts(query: String) : Flow<DataState<ProductSearchResponse>> = flow {
     emit(DataState.Loading)
     try {
-      emit(DataState.Success(mercadoLibreAPIService.getProducts(COUNTRY_ID, query)))
+      emit(DataState.Success(mercadoLibreAPIService.getProducts(countryId, query)))
     } catch (e: Exception) {
       emit(DataState.Error(e))
     }

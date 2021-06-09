@@ -1,7 +1,7 @@
-package com.brahian.mercadolibreapp.service
+package com.brahian.mercadolibreapp.model.service
 
-import com.brahian.mercadolibreapp.model.ProductSearchResponse
-import com.brahian.mercadolibreapp.model.Seller
+import com.brahian.mercadolibreapp.model.response.ProductSearchResponse
+import com.brahian.mercadolibreapp.model.response.Seller
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

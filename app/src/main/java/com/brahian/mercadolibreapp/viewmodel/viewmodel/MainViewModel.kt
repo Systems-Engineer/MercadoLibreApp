@@ -1,13 +1,13 @@
-package com.brahian.mercadolibreapp.viewmodel
+package com.brahian.mercadolibreapp.viewmodel.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.brahian.mercadolibreapp.model.ProductSearchResponse
-import com.brahian.mercadolibreapp.repository.MercadoLibreRepository
-import com.brahian.mercadolibreapp.util.DataState
+import com.brahian.mercadolibreapp.model.response.ProductSearchResponse
+import com.brahian.mercadolibreapp.model.repository.MercadoLibreRepository
+import com.brahian.mercadolibreapp.viewmodel.util.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

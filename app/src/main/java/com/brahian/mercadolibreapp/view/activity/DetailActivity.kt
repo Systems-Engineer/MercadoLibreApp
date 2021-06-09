@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp.ui
+package com.brahian.mercadolibreapp.view.activity
 
 import android.content.Context
 import android.content.Intent
@@ -11,16 +11,16 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.model.Attribute
-import com.brahian.mercadolibreapp.model.Product
-import com.brahian.mercadolibreapp.model.Seller
-import com.brahian.mercadolibreapp.ui.view.AttributeAdapter
-import com.brahian.mercadolibreapp.util.DataState.*
-import com.brahian.mercadolibreapp.util.formatToCurrency
-import com.brahian.mercadolibreapp.util.setTextAndCapitalize
-import com.brahian.mercadolibreapp.util.setVisibleText
-import com.brahian.mercadolibreapp.viewmodel.DetailStateEvent
-import com.brahian.mercadolibreapp.viewmodel.DetailViewModel
+import com.brahian.mercadolibreapp.model.response.Attribute
+import com.brahian.mercadolibreapp.model.response.Product
+import com.brahian.mercadolibreapp.model.response.Seller
+import com.brahian.mercadolibreapp.view.customview.AttributeAdapter
+import com.brahian.mercadolibreapp.viewmodel.util.DataState.*
+import com.brahian.mercadolibreapp.view.util.formatToCurrency
+import com.brahian.mercadolibreapp.view.util.setTextAndCapitalize
+import com.brahian.mercadolibreapp.view.util.setVisibleText
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.DetailStateEvent
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.DetailViewModel
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +29,9 @@ import kotlinx.android.synthetic.main.layout_seller_info.*
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Activity for detail of product
+ */
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 

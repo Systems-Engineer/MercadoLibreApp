@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp.ui.view
+package com.brahian.mercadolibreapp.view.customview
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +9,14 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.model.Product
-import com.brahian.mercadolibreapp.util.formatToCurrency
+import com.brahian.mercadolibreapp.model.response.Product
+import com.brahian.mercadolibreapp.view.util.formatToCurrency
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
+/**
+ * Adapter for displaying products on RecyclerView
+ */
 class ProductAdapter(private val dataSet: List<Product>, private val glide : RequestManager, private val onTap : (Product)-> Unit) :
   RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp.di
+package com.brahian.mercadolibreapp.di.module
 
 import dagger.Module
 import dagger.Provides

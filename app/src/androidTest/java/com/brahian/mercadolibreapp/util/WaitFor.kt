@@ -8,12 +8,16 @@ import org.hamcrest.Matcher
 import java.time.Clock
 import java.time.Duration
 
-class Wait(private val view: Matcher<View>, private var timeout: Long = 10 * 1000L, private var pollingPeriod: Long = 100L) {
+/**
+ * Class to wait for certain conditions to be met during test executions
+ */
+class WaitFor(private val view: Matcher<View>, private var timeout: Long = 10 * 1000L, private var pollingPeriod: Long = 100L) {
+
+    private val clock: Clock = Clock.systemDefaultZone()
+    private val sleeper: Sleeper = Sleeper()
 
     companion object {
-        val TAG = "TEST_" + this::class.java.canonicalName
-        private val clock: Clock = Clock.systemDefaultZone()
-        private val sleeper: Sleeper = Sleeper()
+        val TAG = "TEST_" + this::class.java.name
     }
 
     fun until(condition: ViewAssertion, timeout: Long = this.timeout, pollingPeriod: Long = this.pollingPeriod) {
@@ -22,7 +26,7 @@ class Wait(private val view: Matcher<View>, private var timeout: Long = 10 * 100
         var lastException: Exception?
         var lastAssertionError: AssertionError?
 
-        Log.d(TAG, "waiting for $timeout sec for condition $condition")
+        Log.d(TAG, "Waiting for $timeout sec for condition $condition")
         while (true) {
             lastException = null
             lastAssertionError = null
@@ -34,7 +38,6 @@ class Wait(private val view: Matcher<View>, private var timeout: Long = 10 * 100
                 // be caused by a false or null value, the last exception is not the
                 // cause of the timeout.
                 lastException = null
-
                 return
             } catch (e: Exception) {
                 lastException = e

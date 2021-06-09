@@ -1,7 +1,7 @@
-package com.brahian.mercadolibreapp.di
+package com.brahian.mercadolibreapp.di.module
 
-import com.brahian.mercadolibreapp.repository.MercadoLibreRepository
-import com.brahian.mercadolibreapp.service.MercadoLibreAPIService
+import com.brahian.mercadolibreapp.model.repository.MercadoLibreRepository
+import com.brahian.mercadolibreapp.model.service.MercadoLibreAPIService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

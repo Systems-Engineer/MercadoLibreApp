@@ -1,12 +1,12 @@
-package com.brahian.mercadolibreapp
+package com.brahian.mercadolibreapp.test
 
 import androidx.lifecycle.Observer
-import com.brahian.mercadolibreapp.model.ProductSearchResponse
-import com.brahian.mercadolibreapp.repository.MercadoLibreRepository
-import com.brahian.mercadolibreapp.service.MercadoLibreAPIService
-import com.brahian.mercadolibreapp.util.DataState
-import com.brahian.mercadolibreapp.viewmodel.MainStateEvent
-import com.brahian.mercadolibreapp.viewmodel.MainViewModel
+import com.brahian.mercadolibreapp.model.repository.MercadoLibreRepository
+import com.brahian.mercadolibreapp.model.response.ProductSearchResponse
+import com.brahian.mercadolibreapp.model.service.MercadoLibreAPIService
+import com.brahian.mercadolibreapp.viewmodel.util.DataState
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.MainStateEvent
+import com.brahian.mercadolibreapp.viewmodel.viewmodel.MainViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -18,7 +18,7 @@ import org.junit.Test
 import java.lang.Exception
 
 /**
- * Unit tests para los MainViewModel
+ * Unit tests for MainViewModel
  */
 @ExperimentalCoroutinesApi
 class MainViewModelTest : BaseTest() {

@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp.ui.view
+package com.brahian.mercadolibreapp.view.customview
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.model.Attribute
+import com.brahian.mercadolibreapp.model.response.Attribute
 
+/**
+ * Adapter for attributes of product
+ */
 class AttributeAdapter(private val dataSet: List<Attribute>) :
   RecyclerView.Adapter<AttributeAdapter.ViewHolder>() {
 

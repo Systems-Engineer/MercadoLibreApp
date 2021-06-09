@@ -4,7 +4,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.brahian.mercadolibreapp.R
-import com.brahian.mercadolibreapp.util.Wait
+import com.brahian.mercadolibreapp.util.WaitFor
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matchers.not
 
@@ -19,7 +19,7 @@ object DetailScreen {
     private val shippingAndPagoText = withId(R.id.textview_shipping_pago)
 
     fun waitForScreen(){
-        Wait(attributesRecyclerView).until(matches(isDisplayed()))
+        WaitFor(attributesRecyclerView).until(matches(isDisplayed()))
         onView(sellerProgressBar).check(matches(isDisplayed()))
     }
 
@@ -31,14 +31,14 @@ object DetailScreen {
 
     fun verifySellerLoads(name : String, reputation : String){
         onView(sellerProgressBar).check(matches(isDisplayed()))
-        Wait(sellerProgressBar).until(matches(not(isDisplayed())))
+        WaitFor(sellerProgressBar).until(matches(not(isDisplayed())))
         onView(sellerName).check(matches(allOf(isDisplayed(), withText(name))))
         onView(sellerReputation).check(matches(allOf(isDisplayed(), withText(reputation))))
     }
 
     fun verifySellerDidNotLoad(){
         onView(sellerProgressBar).check(matches(isDisplayed()))
-        Wait(sellerProgressBar).until(matches(not(isDisplayed())))
+        WaitFor(sellerProgressBar).until(matches(not(isDisplayed())))
         onView(sellerName).check(matches(not(isDisplayed())))
         onView(sellerReputation).check(matches(not(isDisplayed())))
     }

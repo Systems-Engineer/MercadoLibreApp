@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp.di
+package com.brahian.mercadolibreapp.di.module
 
 import android.content.Context
 import com.bumptech.glide.Glide

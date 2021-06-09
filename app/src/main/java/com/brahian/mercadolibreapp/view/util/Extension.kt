@@ -1,4 +1,4 @@
-package com.brahian.mercadolibreapp.util
+package com.brahian.mercadolibreapp.view.util
 
 import android.view.View.*
 import android.widget.TextView
